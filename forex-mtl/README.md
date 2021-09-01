@@ -54,21 +54,19 @@ requests.
 
 1. _Logging and monitoring_. In a real production system this would be a hard requirement. All possible scenarios should
    be logged and metrics reported to external systems.
-2. _API parameters validation_. Currently, it silently fails when providing incorrect API params or invalid currency
-   pair. API should validate params and clearly report with http response code and message.
-3. _Application containerization_.
-4. _Handling of expired rates_. Currently, rates are regularly updated with the interval that covers the required max 5
+2. _Application containerization_.
+3. _Handling of expired rates_. Currently, rates are regularly updated with the interval that covers the required max 5
    minutes delay. However, it's possible that the rate provider could fail to respond (e.g. it's hard down for a long
    period of time). In this case application will continue serving outdated rates. Possible improvement is to either
    update in-memory storage with TTL support (e.g. use some in-memory implementation of scalacache) or introduce
    distributed rates storage with TTL support.
-5. _Support for read-only/write-only modes_. In current implementation single host is responsible for both periodic
+4. _Support for read-only/write-only modes_. In current implementation single host is responsible for both periodic
    rates update and serving API requests. It's possible to have dedicated role that runs application in write-only mode
    with disabled HTTP api. The same goes for read-only roles where polling is disabled.
-6. _Distributed storage_. As mentioned above any type of distributed storage can be plugged in. Additionally, in
+5. _Distributed storage_. As mentioned above any type of distributed storage can be plugged in. Additionally, in
    distributed storage scenario it could still have a local in-memory cache on top of distributed storage to improve
    latency.
-7. _Integration tests_. Current implementation only includes unit testing of each independent piece of the system.
+6. _Integration tests_. Current implementation only includes unit testing of each independent piece of the system.
    Production-ready service should have additional layer of integration testing. Currently, this is out of scope.
 
 ## Running the application:

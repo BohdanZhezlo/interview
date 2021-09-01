@@ -1,6 +1,7 @@
 package forex.domain
 
 import cats.Show
+import cats.syntax.show._
 
 sealed trait Currency
 
@@ -27,17 +28,7 @@ object Currency {
     case USD => "USD"
   }
 
-  def fromString(s: String): Currency = s.toUpperCase match {
-    case "AUD" => AUD
-    case "CAD" => CAD
-    case "CHF" => CHF
-    case "EUR" => EUR
-    case "GBP" => GBP
-    case "NZD" => NZD
-    case "JPY" => JPY
-    case "SGD" => SGD
-    case "USD" => USD
-  }
+  def fromString(s: String): Option[Currency] = AllCurrencies.find(_.show == s.toUpperCase)
 
   val AllCurrencies: Seq[Currency] = Seq(AUD, CAD, CHF, EUR, GBP, NZD, JPY, SGD, USD)
 
