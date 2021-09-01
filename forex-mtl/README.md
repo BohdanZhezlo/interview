@@ -68,6 +68,8 @@ requests.
 6. _Distributed storage_. As mentioned above any type of distributed storage can be plugged in. Additionally, in
    distributed storage scenario it could still have a local in-memory cache on top of distributed storage to improve
    latency.
+7. _Integration tests_. Current implementation only includes unit testing of each independent piece of the system.
+   Production-ready service should have additional layer of integration testing. Currently, this is out of scope.
 
 ## Running the application:
 
@@ -90,4 +92,3 @@ Response:
 ```
 
 Re-run the request one more time in 3 min, observe that timestamp on the response has changed.
-
