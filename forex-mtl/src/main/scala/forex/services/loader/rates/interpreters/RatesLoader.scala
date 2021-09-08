@@ -20,7 +20,6 @@ class RatesLoader[F[_]: Timer: Concurrent](provider: RatesProvider[F],
     Stream
       .eval(refreshRates())
       .concurrently(Stream.awakeEvery[F](config.reloadInterval).evalMap(_ => refreshRates()))
-      .void
       .handleErrorWith(_ => load)
 
   private def refreshRates(): F[Unit] =
